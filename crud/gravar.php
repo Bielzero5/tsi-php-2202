@@ -5,14 +5,7 @@ $nome = $_POST['nome'];
 $turno = $_POST['turno'];
 $inicio = $_POST['inicio'];
 
-$user = [$nome, $turno, $inicio];
-
-foreach ($user as $key => $value) {
-    echo '<br><br>'.$value;
-}
-
-
-$consult = "INSERT INTO ADMINISTRADOR(nome, turno, inicio) 
+$consult = "INSERT INTO alunos(nome, turno, inicio) 
 VALUES(:nome, :turno, :inicio)";
 $mysqlConsult = $bd->prepare($consult);
 
@@ -26,3 +19,13 @@ $mysqlConsult = $bd->prepare($consult);
  /* 
     A função $mysqlConsult->bindParam() substitui os rótulos (ex: ":nome") pelos dados iinseguros
  */ 
+
+ /**
+  * Executa a consulta
+  */
+  if( $mysqlConsult->execute()) {
+    echo "Inserido com sucesso";
+  } else {
+    echo "Falhou";
+  }
+  

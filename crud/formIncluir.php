@@ -22,6 +22,8 @@
         <input type="date" name="inicio" id="inicio">
         <input type="submit" value="Enviar">
     </form>
+
+    
 </body>
 </html>
 
