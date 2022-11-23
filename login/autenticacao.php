@@ -21,6 +21,13 @@ $autenticou = false;
 
 if( isset($usuario['nome']) ){
 
+    if( password_verify( $senha, $usuario['senha']) ){
+
+        session_start();
+        $_SESSION['id'] = $email;
+        
+        header('Location: /tsi-php-2202/menu');
+    }
 }
 
 include 'index.php';

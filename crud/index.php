@@ -1,13 +1,25 @@
 <?php
+require_once '../controleDeSessao/controle.php';
+
 require_once '../bancoDeDados/conecta.php';
 
-$stmt = $bd->query('SELECT id, nome, turno, inicio FROM alunos');  
+$nome = $_POST['nome'];
+$turno = $_POST['turno'];
+$inicio = $_POST['inicio'];
 
-$alunos = [];
+$consulta = 
+    $bd->prepare('  INSERT INTO alunos 
+                        (nome, turno, inicio)
+                    VALUES
+                        (:nome, :turno, :inicio)');
 
-while( $registro = $stmt->fetch(PDO::FETCH_ASSOC) ){
+$consulta->bindParam(':nome', $nome);
+$consulta->bindParam(':turno', $turno);
+$consulta->bindParam(':inicio', $inicio);
 
-    $alunos[] = $registro;
+if( $consulta->execute() ){
+    $gravou = true;
+}else{
+    $gravou = false;
 }
-
-include 'view/listar.php';
+include 'index.php';
